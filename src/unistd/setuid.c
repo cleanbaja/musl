@@ -4,5 +4,5 @@
 
 int setuid(uid_t uid)
 {
-	return __setxid(SYS_setuid, uid, 0, 0);
+	return __setxid(SYS_set_id, ID_UID, uid, 0, 0);
 }

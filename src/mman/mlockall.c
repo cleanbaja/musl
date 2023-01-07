@@ -3,5 +3,6 @@
 
 int mlockall(int flags)
 {
-	return syscall(SYS_mlockall, flags);
+	syscall(SYS_debug_log, "musl: mlockall() is unimplemented!");
+	return ENOSYS;
 }

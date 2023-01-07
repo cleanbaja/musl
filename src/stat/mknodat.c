@@ -3,5 +3,6 @@
 
 int mknodat(int fd, const char *path, mode_t mode, dev_t dev)
 {
-	return syscall(SYS_mknodat, fd, path, mode, dev);
+	syscall(SYS_debug_log, "musl: mknodat() is missing!");
+	return ENOSYS;
 }

@@ -24,19 +24,6 @@ static void *volatile vdso_func = (void *)getcpu_init;
 
 int sched_getcpu(void)
 {
-	int r;
-	unsigned cpu;
-
-#ifdef VDSO_GETCPU_SYM
-	getcpu_f f = (getcpu_f)vdso_func;
-	if (f) {
-		r = f(&cpu, 0, 0);
-		if (!r) return cpu;
-		if (r != -ENOSYS) return __syscall_ret(r);
-	}
-#endif
-
-	r = __syscall(SYS_getcpu, &cpu, 0, 0);
-	if (!r) return cpu;
-	return __syscall_ret(r);
+	syscall(SYS_debug_log, "musl: sched_getcpu() is unimplemented!");
+	return ENOSYS;
 }

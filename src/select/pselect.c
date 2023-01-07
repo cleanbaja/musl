@@ -21,6 +21,6 @@ int pselect(int n, fd_set *restrict rfds, fd_set *restrict wfds, fd_set *restric
 		return __syscall_ret(r);
 	s = CLAMP(s);
 #endif
-	return syscall_cp(SYS_pselect6, n, rfds, wfds, efds,
+	return syscall_cp(SYS_pselect, n, rfds, wfds, efds,
 		ts ? ((long[]){s, ns}) : 0, data);
 }

@@ -3,5 +3,6 @@
 
 int getgroups(int count, gid_t list[])
 {
-	return syscall(SYS_getgroups, count, list);
+	syscall(SYS_debug_log, "musl: getgroups() is undefined!");
+	return ENOSYS;
 }

@@ -3,5 +3,6 @@
 
 int sigsuspend(const sigset_t *mask)
 {
-	return syscall_cp(SYS_rt_sigsuspend, mask, _NSIG/8);
+	syscall(SYS_debug_log, "musl: sigsuspend() is unimplemented!");
+	return ENOSYS;
 }

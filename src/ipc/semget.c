@@ -12,7 +12,8 @@ int semget(key_t key, int n, int fl)
 	 * we have to check here. */
 	if (n > USHRT_MAX) return __syscall_ret(-EINVAL);
 #ifndef SYS_ipc
-	return syscall(SYS_semget, key, n, fl);
+	syscall(SYS_debug_log, "musl: semget() is unimplemented!");
+	return ENOSYS;
 #else
 	return syscall(SYS_ipc, IPCOP_semget, key, n, fl);
 #endif

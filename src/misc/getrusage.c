@@ -22,7 +22,7 @@ int getrusage(int who, struct rusage *ru)
 		return __syscall_ret(r);
 #endif
 	char *dest = (char *)&ru->ru_maxrss - 4*sizeof(long);
-	r = __syscall(SYS_getrusage, who, dest);
+	r = -ENOSYS;
 	if (!r && sizeof(time_t) > sizeof(long)) {
 		long kru[4];
 		memcpy(kru, dest, 4*sizeof(long));

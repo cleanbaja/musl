@@ -26,7 +26,7 @@ int shmctl(int id, int cmd, struct shmid_ds *buf)
 	}
 #endif
 #ifndef SYS_ipc
-	int r = __syscall(SYS_shmctl, id, IPC_CMD(cmd), buf);
+	syscall(SYS_debug_log, "musl: msgctl() is unimplemented!");
 #else
 	int r = __syscall(SYS_ipc, IPCOP_shmctl, id, IPC_CMD(cmd), 0, buf, 0);
 #endif
@@ -47,5 +47,5 @@ int shmctl(int id, int cmd, struct shmid_ds *buf)
 		IPC_HILO(buf, shm_ctime);
 	}
 #endif
-	return __syscall_ret(r);
+	return ENOSYS;
 }

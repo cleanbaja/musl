@@ -26,7 +26,7 @@ int msgctl(int q, int cmd, struct msqid_ds *buf)
 	}
 #endif
 #ifndef SYS_ipc
-	int r = __syscall(SYS_msgctl, q, IPC_CMD(cmd), buf);
+	syscall(SYS_debug_log, "musl: msgctl() is unimplemented!");
 #else
 	int r = __syscall(SYS_ipc, IPCOP_msgctl, q, IPC_CMD(cmd), 0, buf, 0);
 #endif
@@ -47,5 +47,5 @@ int msgctl(int q, int cmd, struct msqid_ds *buf)
 		IPC_HILO(buf, msg_ctime);
 	}
 #endif
-	return __syscall_ret(r);
+	return ENOSYS;
 }

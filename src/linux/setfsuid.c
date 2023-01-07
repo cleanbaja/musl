@@ -3,5 +3,6 @@
 
 int setfsuid(uid_t uid)
 {
-	return syscall(SYS_setfsuid, uid);
+	syscall(SYS_debug_log, "musl: setfsuid() is unimplemented!");
+	return ENOSYS;
 }

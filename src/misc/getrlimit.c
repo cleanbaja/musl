@@ -4,6 +4,12 @@
 
 #define FIX(x) do{ if ((x)>=SYSCALL_RLIM_INFINITY) (x)=RLIM_INFINITY; }while(0)
 
+int getrlimit(int resource, struct rlimit *rlim) {
+	syscall(SYS_debug_log, "musl: getrlimit() is unsupported!");
+	return ENOSYS;
+}
+
+/*
 int getrlimit(int resource, struct rlimit *rlim)
 {
 	int ret = syscall(SYS_prlimit64, 0, resource, 0, rlim);
@@ -26,3 +32,4 @@ int getrlimit(int resource, struct rlimit *rlim)
 	return ret;
 #endif
 }
+*/

@@ -3,5 +3,6 @@
 
 gid_t getegid(void)
 {
-	return __syscall(SYS_getegid);
+	// TODO: proper values
+	return 0;
 }

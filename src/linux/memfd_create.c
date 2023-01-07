@@ -4,5 +4,7 @@
 
 int memfd_create(const char *name, unsigned flags)
 {
-	return syscall(SYS_memfd_create, name, flags);
+	syscall(SYS_debug_log, "musl: memfd_create() is unimplemented!");
+	return ENOSYS;
+	//return syscall(SYS_memfd_create, name, flags);
 }

@@ -4,5 +4,6 @@
 
 int mincore (void *addr, size_t len, unsigned char *vec)
 {
-	return syscall(SYS_mincore, addr, len, vec);
+	syscall(SYS_debug_log, "musl: mincore() is unimplemented!");
+	return ENOSYS;
 }

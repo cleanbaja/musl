@@ -3,5 +3,6 @@
 
 int waitid(idtype_t type, id_t id, siginfo_t *info, int options)
 {
-	return syscall_cp(SYS_waitid, type, id, info, options, 0);
+	syscall(SYS_debug_log, "musl: waitid() is unimplemented!");
+	return ENOSYS;
 }

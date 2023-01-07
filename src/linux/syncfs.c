@@ -4,5 +4,5 @@
 
 int syncfs(int fd)
 {
-	return syscall(SYS_syncfs, fd);
+	return ENOSYS;
 }

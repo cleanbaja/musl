@@ -30,7 +30,7 @@ int setrlimit(int resource, const struct rlimit *rlim)
 		FIX(tmp.rlim_max);
 		rlim = &tmp;
 	}
-	int ret = __syscall(SYS_prlimit64, 0, resource, rlim, 0);
+	int ret = -ENOSYS;
 #ifdef SYS_setrlimit
 	if (ret != -ENOSYS) return __syscall_ret(ret);
 

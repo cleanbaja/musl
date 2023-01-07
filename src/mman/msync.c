@@ -3,5 +3,6 @@
 
 int msync(void *start, size_t len, int flags)
 {
-	return syscall_cp(SYS_msync, start, len, flags);
+	syscall(SYS_debug_log, "musl: msync() is unimplemented!");
+	return ENOSYS;
 }

@@ -3,9 +3,6 @@
 
 int mlock(const void *addr, size_t len)
 {
-#ifdef SYS_mlock
-	return syscall(SYS_mlock, addr, len);
-#else
-	return syscall(SYS_mlock2, addr, len, 0);
-#endif
+	syscall(SYS_debug_log, "musl: mlock() is not implemented!");
+	return ENOSYS;
 }

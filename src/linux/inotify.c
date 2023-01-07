@@ -8,19 +8,18 @@ int inotify_init()
 }
 int inotify_init1(int flags)
 {
-	int r = __syscall(SYS_inotify_init1, flags);
-#ifdef SYS_inotify_init
-	if (r==-ENOSYS && !flags) r = __syscall(SYS_inotify_init);
-#endif
-	return __syscall_ret(r);
+	syscall(SYS_debug_log, "musl: inotify_init() is unsupported!");
+	return ENOSYS;
 }
 
 int inotify_add_watch(int fd, const char *pathname, uint32_t mask)
 {
-	return syscall(SYS_inotify_add_watch, fd, pathname, mask);
+	syscall(SYS_debug_log, "musl: inotify_add_watch() is unsupported!");
+	return ENOSYS;
 }
 
 int inotify_rm_watch(int fd, int wd)
 {
-	return syscall(SYS_inotify_rm_watch, fd, wd);
+	syscall(SYS_debug_log, "musl: inotify_rm_watch() is unsupported!");
+	return ENOSYS;
 }

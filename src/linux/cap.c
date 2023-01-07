@@ -2,10 +2,10 @@
 
 int capset(void *a, void *b)
 {
-	return syscall(SYS_capset, a, b);
+	return ENOSYS;
 }
 
 int capget(void *a, void *b)
 {
-	return syscall(SYS_capget, a, b);
+	return ENOSYS;
 }

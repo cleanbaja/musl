@@ -3,5 +3,6 @@
 
 int sigpending(sigset_t *set)
 {
-	return syscall(SYS_rt_sigpending, set, _NSIG/8);
+	syscall(SYS_debug_log, "musl: sigpending() is unimplemented!");
+	return ENOSYS;
 }

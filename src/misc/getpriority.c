@@ -3,7 +3,6 @@
 
 int getpriority(int which, id_t who)
 {
-	int ret = syscall(SYS_getpriority, which, who);
-	if (ret < 0) return ret;
-	return 20-ret;
+	syscall(SYS_debug_log, "musl: getpriority() is a stub!");
+	return 10;
 }

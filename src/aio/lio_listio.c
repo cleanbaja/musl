@@ -46,7 +46,8 @@ static void notify_signal(struct sigevent *sev)
 		.si_pid = getpid(),
 		.si_uid = getuid()
 	};
-	__syscall(SYS_rt_sigqueueinfo, si.si_pid, si.si_signo, &si);
+	// munix doesn't support sigqueueinfo
+	__builtin_trap();
 }
 
 static void *wait_thread(void *p)

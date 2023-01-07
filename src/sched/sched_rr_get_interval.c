@@ -17,5 +17,6 @@ int sched_rr_get_interval(pid_t pid, struct timespec *ts)
 #endif
 	/* If reaching this point, it's a 64-bit arch or time64-only
 	 * 32-bit arch and we can get result directly into timespec. */
-	return syscall(SYS_sched_rr_get_interval, pid, ts);
+	//return syscall(SYS_sched_rr_get_interval, pid, ts);
+	return ENOSYS;
 }

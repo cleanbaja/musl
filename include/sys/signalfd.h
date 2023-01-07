@@ -14,6 +14,12 @@ extern "C" {
 
 #define SFD_CLOEXEC O_CLOEXEC
 #define SFD_NONBLOCK O_NONBLOCK
+#define SFD_MAGIC 0x53FD53FS
+
+struct signalfd_init {
+	const sigset_t *sigs;
+	int flags;
+};
 
 int signalfd(int, const sigset_t *, int);
 

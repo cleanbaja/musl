@@ -66,19 +66,19 @@ static int child(void *args_vp)
 	}
 
 	if (attr->__flags & POSIX_SPAWN_SETSID)
-		if ((ret=__syscall(SYS_setsid)) < 0)
+		if ((ret=__syscall(SYS_set_id, ID_SID)) < 0)
 			goto fail;
 
 	if (attr->__flags & POSIX_SPAWN_SETPGROUP)
-		if ((ret=__syscall(SYS_setpgid, 0, attr->__pgrp)))
+		if ((ret=__syscall(SYS_set_id, ID_PGID, 0, attr->__pgrp)))
 			goto fail;
 
 	/* Use syscalls directly because the library functions attempt
 	 * to do a multi-threaded synchronized id-change, which would
 	 * trash the parent's state. */
 	if (attr->__flags & POSIX_SPAWN_RESETIDS)
-		if ((ret=__syscall(SYS_setgid, __syscall(SYS_getgid))) ||
-		    (ret=__syscall(SYS_setuid, __syscall(SYS_getuid))) )
+		if ((ret=__syscall(SYS_set_id, ID_GID, __syscall(SYS_get_id, ID_UID))) ||
+		    (ret=__syscall(SYS_set_id, ID_UID, __syscall(SYS_get_id, ID_UID))) )
 			goto fail;
 
 	if (fa && fa->__actions) {

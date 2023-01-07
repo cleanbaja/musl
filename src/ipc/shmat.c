@@ -5,7 +5,8 @@
 #ifndef SYS_ipc
 void *shmat(int id, const void *addr, int flag)
 {
-	return (void *)syscall(SYS_shmat, id, addr, flag);
+	syscall(SYS_debug_log, "musl: shmat() is not implemented!");
+	return (void *)ENOSYS;
 }
 #else
 void *shmat(int id, const void *addr, int flag)

@@ -3,5 +3,6 @@
 
 int setfsgid(gid_t gid)
 {
-	return syscall(SYS_setfsgid, gid);
+	syscall(SYS_debug_log, "musl: setfsgid() is unimplemented!");
+	return ENOSYS;
 }

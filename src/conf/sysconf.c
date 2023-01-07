@@ -25,6 +25,10 @@
 
 #define RLIM(x) (-32768|(RLIMIT_ ## x))
 
+// munix has a different api for querying system info
+// NOTE: see pconf(2)
+
+
 long sysconf(int name)
 {
 	static const short values[] = {
@@ -53,7 +57,7 @@ long sysconf(int name)
 		[_SC_SHARED_MEMORY_OBJECTS] = VER,
 		[_SC_AIO_LISTIO_MAX] = -1,
 		[_SC_AIO_MAX] = -1,
-		[_SC_AIO_PRIO_DELTA_MAX] = JT_ZERO, /* ?? */
+		[_SC_AIO_PRIO_DELTA_MAX] = JT_ZERO, // ?? 
 		[_SC_DELAYTIMER_MAX] = JT_DELAYTIMER_MAX,
 		[_SC_MQ_OPEN_MAX] = -1,
 		[_SC_MQ_PRIO_MAX] = JT_MQ_PRIO_MAX,
@@ -201,12 +205,8 @@ long sysconf(int name)
 		return DELAYTIMER_MAX;
 	case JT_NPROCESSORS_CONF & 255:
 	case JT_NPROCESSORS_ONLN & 255: ;
-		unsigned char set[128] = {1};
-		int i, cnt;
-		__syscall(SYS_sched_getaffinity, 0, sizeof set, set);
-		for (i=cnt=0; i<sizeof set; i++)
-			for (; set[i]; set[i]&=set[i]-1, cnt++);
-		return cnt;
+		// TODO(cleanbaja): implement get_affinity so we can return real values
+		return 1;
 	case JT_PHYS_PAGES & 255:
 	case JT_AVPHYS_PAGES & 255: ;
 		unsigned long long mem;

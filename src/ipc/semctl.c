@@ -45,7 +45,7 @@ int semctl(int id, int num, int cmd, ...)
 	}
 #endif
 #ifndef SYS_ipc
-	int r = __syscall(SYS_semctl, id, num, IPC_CMD(cmd), arg.buf);
+	syscall(SYS_debug_log, "musl: semctl() is unimplemented!");
 #else
 	int r = __syscall(SYS_ipc, IPCOP_semctl, id, num, IPC_CMD(cmd), &arg.buf);
 #endif
@@ -65,5 +65,5 @@ int semctl(int id, int num, int cmd, ...)
 		IPC_HILO(arg.buf, sem_ctime);
 	}
 #endif
-	return __syscall_ret(r);
+	return ENOSYS;
 }

@@ -3,5 +3,6 @@
 
 int munlockall(void)
 {
-	return syscall(SYS_munlockall);
+	syscall(SYS_debug_log, "musl: munlockall() is unimplemented!");
+	return ENOSYS;
 }

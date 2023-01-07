@@ -13,6 +13,13 @@ typedef uint64_t eventfd_t;
 #define EFD_SEMAPHORE 1
 #define EFD_CLOEXEC O_CLOEXEC
 #define EFD_NONBLOCK O_NONBLOCK
+#define EFD_MAGIC 0xEFDEFD00
+
+struct eventfd_init {
+	uint32_t magic;
+	unsigned int count;
+	int flags;
+};
 
 int eventfd(unsigned int, int);
 int eventfd_read(int, eventfd_t *);

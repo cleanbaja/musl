@@ -3,5 +3,6 @@
 
 mode_t umask(mode_t mode)
 {
-	return syscall(SYS_umask, mode);
+	syscall(SYS_debug_log, "musl: umask() is missing!");
+	return ENOSYS;
 }

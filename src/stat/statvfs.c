@@ -5,21 +5,17 @@
 static int __statfs(const char *path, struct statfs *buf)
 {
 	*buf = (struct statfs){0};
-#ifdef SYS_statfs64
-	return syscall(SYS_statfs64, path, sizeof *buf, buf);
-#else
-	return syscall(SYS_statfs, path, buf);
-#endif
+
+	syscall(SYS_debug_log, "musl: statfs() is missing!");
+	return ENOSYS;
 }
 
 static int __fstatfs(int fd, struct statfs *buf)
 {
 	*buf = (struct statfs){0};
-#ifdef SYS_fstatfs64
-	return syscall(SYS_fstatfs64, fd, sizeof *buf, buf);
-#else
-	return syscall(SYS_fstatfs, fd, buf);
-#endif
+	
+	syscall(SYS_debug_log, "musl: fstatfs() is missing!");
+	return ENOSYS;
 }
 
 weak_alias(__statfs, statfs);

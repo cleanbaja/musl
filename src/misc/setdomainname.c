@@ -4,5 +4,6 @@
 
 int setdomainname(const char *name, size_t len)
 {
-	return syscall(SYS_setdomainname, name, len);
+	syscall(SYS_debug_log, "musl: setdomainname() is unimplemented!");
+	return ENOSYS;
 }

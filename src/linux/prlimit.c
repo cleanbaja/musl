@@ -6,6 +6,12 @@
 
 int prlimit(pid_t pid, int resource, const struct rlimit *new_limit, struct rlimit *old_limit)
 {
+	syscall(SYS_debug_log, "musl: prlimit() is unimplemented!");
+	return ENOSYS;
+}
+/*
+int prlimit(pid_t pid, int resource, const struct rlimit *new_limit, struct rlimit *old_limit)
+{
 	struct rlimit tmp;
 	int r;
 	if (new_limit && SYSCALL_RLIM_INFINITY != RLIM_INFINITY) {
@@ -21,3 +27,4 @@ int prlimit(pid_t pid, int resource, const struct rlimit *new_limit, struct rlim
 	}
 	return r;
 }
+*/

@@ -4,5 +4,5 @@
 
 int vhangup(void)
 {
-	return syscall(SYS_vhangup);
+	return ENOSYS;
 }

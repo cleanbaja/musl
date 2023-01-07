@@ -3,5 +3,6 @@
 
 int setpriority(int which, id_t who, int prio)
 {
-	return syscall(SYS_setpriority, which, who, prio);
+	syscall(SYS_debug_log, "musl: setpriority() is unimplemented!");
+	return ENOSYS;
 }

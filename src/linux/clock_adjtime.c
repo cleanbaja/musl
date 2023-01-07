@@ -118,8 +118,7 @@ int clock_adjtime (clockid_t clock_id, struct timex *utx)
 		if (clock_id==CLOCK_REALTIME) r = __syscall(SYS_adjtimex, &ktx);
 		else
 #endif
-		r = __syscall(SYS_clock_adjtime, clock_id, &ktx);
-		if (r>=0) {
+		if (0) {
 			utx->modes = ktx.modes;
 			utx->offset = ktx.offset;
 			utx->freq = ktx.freq;
@@ -142,10 +141,10 @@ int clock_adjtime (clockid_t clock_id, struct timex *utx)
 			utx->stbcnt = ktx.stbcnt;
 			utx->tai = ktx.tai;
 		}
-		return __syscall_ret(r);
+		return ENOSYS;
 	}
 #ifdef SYS_adjtimex
 	if (clock_id==CLOCK_REALTIME) return syscall(SYS_adjtimex, utx);
 #endif
-	return syscall(SYS_clock_adjtime, clock_id, utx);
+	return ENOSYS;
 }

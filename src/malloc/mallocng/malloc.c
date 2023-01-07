@@ -55,18 +55,19 @@ struct meta *alloc_meta(void)
 	if ((m = dequeue_head(&ctx.free_meta_head))) return m;
 	if (!ctx.avail_meta_count) {
 		int need_unprotect = 1;
+		syscall(SYS_debug_log, "musl: attempt to use sbrk(), which is legacy!");
 		if (!ctx.avail_meta_area_count && ctx.brk!=-1) {
 			uintptr_t new = ctx.brk + pagesize;
 			int need_guard = 0;
 			if (!ctx.brk) {
 				need_guard = 1;
-				ctx.brk = brk(0);
+				ctx.brk = 0;
 				// some ancient kernels returned _ebss
 				// instead of next page as initial brk.
 				ctx.brk += -ctx.brk & (pagesize-1);
 				new = ctx.brk + 2*pagesize;
 			}
-			if (brk(new) != new) {
+			if (0 != new) {
 				ctx.brk = -1;
 			} else {
 				if (need_guard) mmap((void *)ctx.brk, pagesize,

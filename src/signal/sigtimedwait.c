@@ -19,7 +19,8 @@ static int do_sigtimedwait(const sigset_t *restrict mask, siginfo_t *restrict si
 	return __syscall_cp(SYS_rt_sigtimedwait, mask, si,
 		ts ? ((long[]){CLAMP(s), ns}) : 0, _NSIG/8);;
 #else
-	return __syscall_cp(SYS_rt_sigtimedwait, mask, si, ts, _NSIG/8);
+	syscall(SYS_debug_log, "musl: sigtimedwait() is unimplemented!");
+	return -ENOSYS;
 #endif
 }
 

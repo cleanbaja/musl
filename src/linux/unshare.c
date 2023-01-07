@@ -4,5 +4,5 @@
 
 int unshare(int flags)
 {
-	return syscall(SYS_unshare, flags);
+	return ENOSYS;
 }

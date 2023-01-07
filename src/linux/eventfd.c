@@ -5,11 +5,17 @@
 
 int eventfd(unsigned int count, int flags)
 {
-	int r = __syscall(SYS_eventfd2, count, flags);
-#ifdef SYS_eventfd
-	if (r==-ENOSYS && !flags) r = __syscall(SYS_eventfd, count);
-#endif
-	return __syscall_ret(r);
+	int r = open("/proc/self/eventctl", O_RDWR);
+	if (r == -1)
+		return errno;
+
+	struct eventfd_init payload = { EFD_MAGIC, count, flags };
+
+	int status = write(r, &payload, sizeof(struct eventfd_init));
+	if (status == -1)
+		return errno;
+
+	return r;
 }
 
 int eventfd_read(int fd, eventfd_t *value)

@@ -3,5 +3,5 @@
 
 pid_t getpid(void)
 {
-	return __syscall(SYS_getpid);
+	return __syscall(SYS_get_id, ID_PID);
 }

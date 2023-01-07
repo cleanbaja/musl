@@ -4,5 +4,6 @@
 
 int chroot(const char *path)
 {
-	return syscall(SYS_chroot, path);
+	syscall(SYS_debug_log, "musl: chroot() is unimplemented!");
+	return ENOSYS;
 }

@@ -3,5 +3,6 @@
 
 int munlock(const void *addr, size_t len)
 {
-	return syscall(SYS_munlock, addr, len);
+	syscall(SYS_debug_log, "musl: munlock() is unimplemented!");
+	return ENOSYS;
 }

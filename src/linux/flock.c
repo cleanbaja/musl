@@ -3,5 +3,6 @@
 
 int flock(int fd, int op)
 {
-	return syscall(SYS_flock, fd, op);
+	syscall(SYS_debug_log, "musl: flock() is unimplemented!");
+	return ENOSYS;
 }
