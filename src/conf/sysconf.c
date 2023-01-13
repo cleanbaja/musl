@@ -211,7 +211,7 @@ long sysconf(int name)
 	case JT_AVPHYS_PAGES & 255: ;
 		unsigned long long mem;
 		struct sysinfo si;
-		__lsysinfo(&si);
+		syscall(SYS_debug_log, "musl: sysinfo is required for sysconf!");
 		if (!si.mem_unit) si.mem_unit = 1;
 		if (name==_SC_PHYS_PAGES) mem = si.totalram;
 		else mem = si.freeram + si.bufferram;

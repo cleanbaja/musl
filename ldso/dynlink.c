@@ -1677,13 +1677,6 @@ static void install_new_tls(void)
 		if (p->tls_id == tls_cnt) break;
 	}
 
-	/* Broadcast barrier to ensure contents of new dtv is visible
-	 * if the new dtv pointer is. The __membarrier function has a
-	 * fallback emulation using signals for kernels that lack the
-	 * feature at the syscall level. */
-
-	__membarrier(MEMBARRIER_CMD_PRIVATE_EXPEDITED, 0);
-
 	/* Install new dtv for each thread. */
 	for (j=0, td=self; !j || td!=self; j++, td=td->next) {
 		td->dtv = newdtv[j];
